@@ -1,12 +1,14 @@
 C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Item.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Grocery.java
+C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\wrap\WrappedItem.java
 C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\Pointofsale.java
 C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\Catalog.java
 C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Clothing.java
 C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Beverage.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Electronic.java
 C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Itemfactory.java
+C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Product.java
+C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Grocery.java
+C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Electronic.java
 C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\Pos.java
 C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\Product.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Product.java
 C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\ProductSingleton.java
+C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\wrap\ItemWrapping.java
