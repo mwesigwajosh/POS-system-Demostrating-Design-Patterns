@@ -1,4 +1,6 @@
 package com.pos;
+import com.pos.barcodescanner.Barcodescanner;
+import com.pos.barcodescanner.Observercart;
 import com.pos.item.Cart;
 import com.pos.item.ProductSingleton;
 import com.pos.item.Product;
@@ -34,6 +36,7 @@ public class Pointofsale extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
+    
     private void updateTable(){
         ProductSingleton product = ProductSingleton.getInstance();
         ArrayList<Product> products = product.getProducts();
@@ -68,6 +71,45 @@ public class Pointofsale extends javax.swing.JFrame {
         calculated_price.setText(String.valueOf(total));
     }
     
+    //adding product to cart via barcode scanner
+    private void barcodescanner(int itemID){
+        Barcodescanner bscanner = new Barcodescanner();
+        Observercart cart = new Observercart();
+        bscanner.registerObserver(cart);
+        bscanner.notifyObserver(itemID);
+        int itemcode = cart.getproductCode();
+        int rows = productsTable.getRowCount();
+        DefaultTableModel DF = (DefaultTableModel)cartTable.getModel();
+        Vector v = new Vector();
+        
+        if(rows >0){
+            for(int i = 0; i<rows; i++){
+                int itemcode_in_catalog = parseInt(productsTable.getValueAt(i, 0).toString());
+                if(itemcode == itemcode_in_catalog){
+                    String itemName = productsTable.getValueAt(i, 1).toString();
+                    int itemPrice = parseInt(productsTable.getValueAt(i, 2).toString());
+                    v.add(itemName);
+                    v.add(1);
+                    v.add(itemPrice);
+                    DF.addRow(v);
+                    
+                    cartTotal();
+                    
+                    // notify salesperson
+                    Cart notification_cart = new Cart();
+                    SalesPerson salesperson = new SalesPerson("Cashier");
+                    notification_cart.registerObserver(salesperson);
+                    String notification = notification_cart.notifyObserver();
+                    JOptionPane.showMessageDialog(this,notification);
+                    break;
+                }
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "   No items");
+        }
+        
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -510,6 +552,13 @@ public class Pointofsale extends javax.swing.JFrame {
             v.add(1);
             v.add(productsTable.getValueAt(selectedRow,2));
             model.addRow(v);
+            
+            // notify salesperson
+            Cart cart = new Cart();
+            SalesPerson salesperson = new SalesPerson("Cashier");
+            cart.registerObserver(salesperson);
+            String notification = cart.notifyObserver();
+            JOptionPane.showMessageDialog(this,notification);
         }
         cartTotal();
     }//GEN-LAST:event_addSelectedItemsToCartActionPerformed
@@ -627,9 +676,10 @@ public class Pointofsale extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_decreaseQuantityActionPerformed
 
-    private void ScanBarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScanBarcodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ScanBarcodeActionPerformed
+    private void ScanBarcodeActionPerformed(java.awt.event.ActionEvent evt) {
+        int productCode = parseInt(JOptionPane.showInputDialog("Product Code"));
+        barcodescanner(productCode);
+    }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
