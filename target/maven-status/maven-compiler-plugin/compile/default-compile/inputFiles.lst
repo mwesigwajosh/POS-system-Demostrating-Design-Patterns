@@ -1,14 +1,23 @@
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Item.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\wrap\WrappedItem.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\Pointofsale.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\Catalog.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Clothing.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Beverage.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Itemfactory.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Product.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Grocery.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\Electronic.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\Pos.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\Product.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\ProductSingleton.java
-C:\Users\Josha\OneDrive\Desktop\pos\src\main\java\com\pos\item\wrap\ItemWrapping.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\Catalog.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Cart.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Observer.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\wrap\WrappedItem.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Item.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\ProductSingleton.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\barcodescanner\Observercart.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Product.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\payment\PaymentStrategy.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\Pointofsale.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\Pos.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Clothing.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\barcodescanner\Barcodescanner.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\payment\PaymentContext.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\SalesPerson.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Itemfactory.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Subject.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Grocery.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\payment\CashPaymentStrategy.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Beverage.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\payment\CreditCardPaymentStrategy.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\Electronic.java
+E:\Design Patterns CW\pos\src\main\java\com\pos\item\wrap\ItemWrapping.java

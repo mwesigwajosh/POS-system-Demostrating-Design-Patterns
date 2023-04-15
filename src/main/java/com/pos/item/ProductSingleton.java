@@ -32,9 +32,11 @@ public class ProductSingleton {
                     int id = rs.getInt("id");
                     String category = rs.getString("category");
                     int price = rs.getInt("price");
-                    
-                    Product product = new Product(name, id, category, price);
-                    products.add(product);
+                    int quantity = rs.getInt("quantity");
+                    if(quantity >= 1){
+                        Product product = new Product(name, id, category, price);
+                        products.add(product);
+                    }
                 }
                 rs.close();
                 stmt.close();

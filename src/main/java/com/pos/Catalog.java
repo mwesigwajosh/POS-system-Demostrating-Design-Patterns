@@ -44,14 +44,20 @@ public class Catalog extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         itemPrice = new javax.swing.JTextField();
         itemCategory = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        quantity = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         catalogTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         gotoPOS = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        gotoReports = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        itemid = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -87,6 +93,14 @@ public class Catalog extends javax.swing.JFrame {
 
         itemCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beverage", "Clothing", "Electronic", "Grocery" }));
 
+        jLabel6.setText("Quantity");
+
+        quantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quantityActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -94,9 +108,6 @@ public class Catalog extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(addItemButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -108,7 +119,14 @@ public class Catalog extends javax.swing.JFrame {
                             .addComponent(itemID, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                             .addComponent(itemName)
                             .addComponent(itemPrice)
-                            .addComponent(itemCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(itemCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(addItemButton)
+                        .addGap(0, 206, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(quantity)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,30 +144,34 @@ public class Catalog extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(itemCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(itemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addItemButton)
-                .addGap(0, 91, Short.MAX_VALUE))
+                .addGap(69, 69, 69))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 95, 300, 320));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 95, 300, 270));
 
         catalogTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Name", "ID", "Category", "Price"
+                "Name", "ID", "Category", "Price", "Quantity"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -158,7 +180,7 @@ public class Catalog extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(catalogTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 95, 480, 320));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 95, 480, 410));
 
         gotoPOS.setBackground(new java.awt.Color(153, 204, 255));
         gotoPOS.setText("POS");
@@ -171,14 +193,6 @@ public class Catalog extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(153, 204, 255));
         jButton2.setText("Catalog");
 
-        gotoReports.setBackground(new java.awt.Color(153, 204, 255));
-        gotoReports.setText("Reports");
-        gotoReports.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gotoReportsActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -188,9 +202,7 @@ public class Catalog extends javax.swing.JFrame {
                 .addComponent(gotoPOS)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(gotoReports)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,25 +210,11 @@ public class Catalog extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gotoPOS)
-                    .addComponent(jButton2)
-                    .addComponent(gotoReports))
+                    .addComponent(jButton2))
                 .addGap(0, 0, 0))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 50, -1, -1));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, 40));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 180, 30));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -230,6 +228,59 @@ public class Catalog extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, 20, -1));
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Update Quantity available", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        jLabel7.setText("Item Id");
+
+        jLabel8.setText("Quantity");
+
+        itemid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemidActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(153, 204, 255));
+        jButton1.setText("Update");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(itemid)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(itemid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 290, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -253,6 +304,7 @@ public class Catalog extends javax.swing.JFrame {
                         v.add(rs.getString("id"));
                         v.add(rs.getString("category"));
                         v.add(rs.getString("price"));
+                        v.add(rs.getString("quantity"));
                     }
                     DF.addRow(v);
                 }
@@ -269,12 +321,12 @@ public class Catalog extends javax.swing.JFrame {
         //Using the item factory
             Itemfactory factory = new Itemfactory();
             Item item = factory.getItemCategory(itemCategory.getSelectedItem().toString());
-            item.builditem(itemName.getText(), parseInt(itemID.getText()), parseInt(itemPrice.getText()));      
+            item.builditem(itemName.getText(), parseInt(itemID.getText()), parseInt(itemPrice.getText()), parseInt(quantity.getText()));      
             try {
                 Class.forName(driverName);
                 try {
                     con = DriverManager.getConnection(urlstring, username, password);
-                    String sql = "INSERT INTO catalog(name, id, category, price) VALUES(?,?,?,?)";
+                    String sql = "INSERT INTO catalog(name, id, category, price, quantity) VALUES(?,?,?,?,?)";
                     stmt = con.prepareStatement(sql);
                     stmt.setString(1, item.getname());
                     stmt.setInt(2, item.getID());
@@ -287,6 +339,7 @@ public class Catalog extends javax.swing.JFrame {
                         //decorator pattern not used
                         stmt.setInt(4, item.getPrice());
                     }
+                    stmt.setInt(5,item.getQuantity());
                     stmt.executeUpdate();
                     con.close();
                     JOptionPane.showMessageDialog(this, "Item Added");
@@ -310,9 +363,13 @@ public class Catalog extends javax.swing.JFrame {
         POS.setVisible(true);
     }//GEN-LAST:event_gotoPOSActionPerformed
 
-    private void gotoReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoReportsActionPerformed
+    private void quantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_gotoReportsActionPerformed
+    }//GEN-LAST:event_quantityActionPerformed
+
+    private void itemidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemidActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,22 +410,28 @@ public class Catalog extends javax.swing.JFrame {
     private javax.swing.JButton addItemButton;
     private javax.swing.JTable catalogTable;
     private javax.swing.JButton gotoPOS;
-    private javax.swing.JButton gotoReports;
     private javax.swing.JComboBox<String> itemCategory;
     private javax.swing.JTextField itemID;
     private javax.swing.JTextField itemName;
     private javax.swing.JTextField itemPrice;
+    private javax.swing.JTextField itemid;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField quantity;
     // End of variables declaration//GEN-END:variables
 
     private void If(boolean equalsIgnoreCase) {

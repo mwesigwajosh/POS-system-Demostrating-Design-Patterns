@@ -4,13 +4,16 @@ public class Grocery implements Item {
     int ID;
     String category;
     int price;
+    int quantity;
+    
     Grocery(){
         this.category = "Grocery";
     }
-    public void builditem(String name, int id, int price){
+    public void builditem(String name, int id, int price, int quantity){
         this.Name = name;
         this.ID = id;
         this.price= price;
+        this.quantity = quantity;
     }
     public String getname(){
         return this.Name;
@@ -23,5 +26,8 @@ public class Grocery implements Item {
     }
     public int getID(){
         return this.ID;
+    }
+    public int getQuantity(){
+        return this.quantity;
     }
 }

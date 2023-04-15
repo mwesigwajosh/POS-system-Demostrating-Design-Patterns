@@ -20,6 +20,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
+import com.pos.ReceiptPrinter;
 
 
 public class Pointofsale extends javax.swing.JFrame {
@@ -138,7 +139,6 @@ public class Pointofsale extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         gotoPOS = new javax.swing.JButton();
         gotoCatalog = new javax.swing.JButton();
-        gotoReports = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
 
@@ -279,7 +279,7 @@ public class Pointofsale extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ITEM", "QUANTITY", "PRICE"
+                "ITEM", "QUANTITY", "PRICE @"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -323,7 +323,6 @@ public class Pointofsale extends javax.swing.JFrame {
 
         increaseQuantity.setBackground(new java.awt.Color(102, 255, 51));
         increaseQuantity.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        increaseQuantity.setForeground(new java.awt.Color(0, 0, 0));
         increaseQuantity.setText("+");
         increaseQuantity.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -338,7 +337,6 @@ public class Pointofsale extends javax.swing.JFrame {
 
         decreaseQuantity.setBackground(new java.awt.Color(255, 51, 102));
         decreaseQuantity.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        decreaseQuantity.setForeground(new java.awt.Color(0, 0, 0));
         decreaseQuantity.setText("-");
         decreaseQuantity.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -422,9 +420,6 @@ public class Pointofsale extends javax.swing.JFrame {
             }
         });
 
-        gotoReports.setBackground(new java.awt.Color(153, 204, 255));
-        gotoReports.setText("Reports");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -434,8 +429,7 @@ public class Pointofsale extends javax.swing.JFrame {
                 .addComponent(gotoPOS)
                 .addGap(18, 18, 18)
                 .addComponent(gotoCatalog)
-                .addGap(18, 18, 18)
-                .addComponent(gotoReports))
+                .addGap(90, 90, 90))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,12 +437,11 @@ public class Pointofsale extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gotoPOS)
-                    .addComponent(gotoCatalog)
-                    .addComponent(gotoReports))
+                    .addComponent(gotoCatalog))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 270, -1));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 180, -1));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -567,6 +560,51 @@ public class Pointofsale extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PaymentOptionActionPerformed
 
+    private void updateCatalog(){
+        int rows = cartTable.getRowCount();
+        if(rows >= 1){
+            String item_name;
+            int item_quantity;
+            for(int i=0; i<rows; i++){
+                item_name = cartTable.getValueAt(i, 0).toString();
+                item_quantity = parseInt(cartTable.getValueAt(i, 1).toString());
+                try {
+                    Class.forName(driverName);
+                    try {
+                        con = DriverManager.getConnection(urlstring, username, password);
+                        String sql = "UPDATE catalog SET quantity = quantity - ? WHERE name = ?";
+                        stmt = con.prepareStatement(sql);
+                        stmt.setInt(1, item_quantity);
+                        stmt.setString(2, item_name);
+                        stmt.executeUpdate();
+                        con.close();
+                    }catch (SQLException ex) {
+                        System.out.println("Failed to create the database connection.");
+                    }
+                }catch (ClassNotFoundException ex) {
+                    System.out.println("Driver not found.");  
+                }
+            }
+        }
+    }
+    
+    private void generateReceipt(){
+        // Get the data from the cart table
+        StringBuilder receipt = new StringBuilder();
+        receipt.append("Receipt\n\n");
+        for (int row = 0; row < cartTable.getRowCount(); row++) {
+            String item = cartTable.getValueAt(row, 0).toString();
+            String quantity = cartTable.getValueAt(row, 1).toString();
+            String price = cartTable.getValueAt(row, 2).toString();
+            receipt.append("Item: ").append(item).append("\n");
+            receipt.append("Quantity: ").append(quantity).append("\n");
+            receipt.append("Price: $").append(price).append("\n\n");
+        }
+        receipt.append("5000\n");
+        receipt.append("\nThank you for your purchase!");
+        new ReceiptPrinter(receipt.toString());
+    }
+    
     private void payButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payButtonMouseClicked
         int items_available = cartTable.getRowCount();
         if(items_available < 1){
@@ -611,6 +649,8 @@ public class Pointofsale extends javax.swing.JFrame {
                     System.out.println("Driver not found.");  
                 }
                 JOptionPane.showMessageDialog(this, "Paid");
+                updateCatalog();
+                generateReceipt();
                 clearCart();
             }
             if(selectedPaymentOption.equalsIgnoreCase("CreditCardPayment")){
@@ -641,6 +681,7 @@ public class Pointofsale extends javax.swing.JFrame {
                     System.out.println("Driver not found.");  
                 }
                 JOptionPane.showMessageDialog(this, "Paid");
+                generateReceipt();
                 clearCart();
             }
         }
@@ -666,8 +707,10 @@ public class Pointofsale extends javax.swing.JFrame {
         int currentValue;
         if(selectedRow>=0){
             currentValue = parseInt(cartTable.getValueAt(selectedRow, 1).toString());
-            currentValue= currentValue - 1;
-            cartTable.setValueAt(currentValue, selectedRow, 1);
+            if(currentValue>=2){
+                currentValue= currentValue - 1;
+                cartTable.setValueAt(currentValue, selectedRow, 1);
+            }
         }
         cartTotal();
     }//GEN-LAST:event_decreaseQuantityMouseClicked
@@ -700,7 +743,6 @@ public class Pointofsale extends javax.swing.JFrame {
     private javax.swing.JButton decreaseQuantity;
     private javax.swing.JButton gotoCatalog;
     private javax.swing.JButton gotoPOS;
-    private javax.swing.JButton gotoReports;
     private javax.swing.JButton increaseQuantity;
     private javax.swing.JTextField item_id;
     private javax.swing.JTextField itemname;

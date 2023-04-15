@@ -27,9 +27,13 @@ public abstract class ItemWrapping implements Item {
     public int getPrice() {
         return item.getPrice();
     }
+    
+    public int getQuantity(){
+        return item.getQuantity();
+    }
 
     @Override
-    public void builditem(String name, int id, int price) {
-        item.builditem(name, id, price);
+    public void builditem(String name, int id, int price, int quantity) {
+        item.builditem(name, id, price, quantity);
     }
 }
