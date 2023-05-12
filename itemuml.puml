@@ -1,0 +1,43 @@
+@startuml
+abstract class com.pos.item.wrap.ItemWrapping
+annotation java.lang.Override
+class com.pos.item.Beverage
+class com.pos.item.Cart
+class com.pos.item.Clothing
+class com.pos.item.Electronic
+class com.pos.item.Grocery
+class com.pos.item.Itemfactory
+class com.pos.item.Product
+class com.pos.item.ProductSingleton
+class com.pos.item.SalesPerson
+class com.pos.item.wrap.WrappedItem
+class java.sql.Connection
+class java.sql.DriverManager
+class java.sql.ResultSet
+class java.sql.SQLException
+class java.sql.Statement
+class java.util.ArrayList
+interface com.pos.item.Item
+interface com.pos.item.Observer
+interface com.pos.item.Subject
+com.pos.item.wrap.ItemWrapping ..> java.lang.Override
+com.pos.item.wrap.ItemWrapping --|> com.pos.item.Item
+com.pos.item.Beverage --|> com.pos.item.Item
+com.pos.item.Cart ..> java.lang.Override
+com.pos.item.Cart --|> com.pos.item.Subject
+com.pos.item.Clothing --|> com.pos.item.Item
+com.pos.item.Electronic --|> com.pos.item.Item
+com.pos.item.Grocery --|> com.pos.item.Item
+com.pos.item.ProductSingleton ..> com.pos.item.Product
+com.pos.item.ProductSingleton ..> java.sql.Connection
+com.pos.item.ProductSingleton ..> java.sql.DriverManager
+com.pos.item.ProductSingleton ..> java.sql.ResultSet
+com.pos.item.ProductSingleton ..> java.sql.SQLException
+com.pos.item.ProductSingleton ..> java.sql.Statement
+com.pos.item.ProductSingleton ..> java.util.ArrayList
+com.pos.item.SalesPerson ..> java.lang.Override
+com.pos.item.SalesPerson --|> com.pos.item.Observer
+com.pos.item.wrap.WrappedItem --|> com.pos.item.wrap.ItemWrapping
+com.pos.item.wrap.WrappedItem ..> java.lang.Override
+com.pos.item.wrap.WrappedItem ..> com.pos.item.Item
+@enduml

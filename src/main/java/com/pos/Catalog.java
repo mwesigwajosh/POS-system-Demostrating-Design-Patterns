@@ -2,6 +2,7 @@ package com.pos;
 import com.pos.item.Item;
 import com.pos.item.Itemfactory;
 import com.pos.item.wrap.WrappedItem;
+import java.awt.BorderLayout;
 import static java.lang.Integer.parseInt;
 import java.sql.*;
 import java.util.Vector;
@@ -55,9 +56,9 @@ public class Catalog extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        itemid = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        itemidfield = new javax.swing.JTextField();
+        quantityfield = new javax.swing.JTextField();
+        updateItem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -180,7 +181,7 @@ public class Catalog extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(catalogTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 95, 480, 410));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(347, 105, 470, 400));
 
         gotoPOS.setBackground(new java.awt.Color(153, 204, 255));
         gotoPOS.setText("POS");
@@ -214,7 +215,7 @@ public class Catalog extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 180, 30));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 180, 30));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -235,14 +236,19 @@ public class Catalog extends javax.swing.JFrame {
 
         jLabel8.setText("Quantity");
 
-        itemid.addActionListener(new java.awt.event.ActionListener() {
+        itemidfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemidActionPerformed(evt);
+                itemidfieldActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(153, 204, 255));
-        jButton1.setText("Update");
+        updateItem.setBackground(new java.awt.Color(153, 204, 255));
+        updateItem.setText("Update");
+        updateItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateItemMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -257,11 +263,11 @@ public class Catalog extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(itemid)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)))
+                            .addComponent(itemidfield, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(quantityfield)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(updateItem)
+                        .addGap(0, 193, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -270,14 +276,14 @@ public class Catalog extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(itemid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(itemidfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(quantityfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(updateItem)
+                .addGap(15, 15, 15))
         );
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 290, 130));
@@ -359,17 +365,40 @@ public class Catalog extends javax.swing.JFrame {
     private void gotoPOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoPOSActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Pointofsale POS = new Pointofsale();
-        POS.setVisible(true);
+        Pointofsale pointofsale = new Pointofsale();
+        pointofsale.setLocationRelativeTo(null); // Center the frame
+        pointofsale.setVisible(true);
     }//GEN-LAST:event_gotoPOSActionPerformed
 
     private void quantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_quantityActionPerformed
 
-    private void itemidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemidActionPerformed
+    private void itemidfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemidfieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_itemidActionPerformed
+    }//GEN-LAST:event_itemidfieldActionPerformed
+
+    private void updateItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateItemMouseClicked
+        String itemID = itemidfield.getText();
+        int quantity = parseInt(quantityfield.getText().toString());
+        try {
+            Class.forName(driverName);
+            try {
+                con = DriverManager.getConnection(urlstring, username, password);
+                String sql = "UPDATE catalog SET quantity = quantity + ? WHERE id = ?";
+                stmt = con.prepareStatement(sql);
+                stmt.setInt(1, quantity);
+                stmt.setString(2, itemID);
+                stmt.executeUpdate();
+                con.close();
+                }catch (SQLException ex) {
+                    System.out.println("Failed to create the database connection.");
+                }
+        }catch (ClassNotFoundException ex) {
+            System.out.println("Driver not found.");  
+        }
+        updateTable();
+    }//GEN-LAST:event_updateItemMouseClicked
 
     /**
      * @param args the command line arguments
@@ -401,7 +430,9 @@ public class Catalog extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Catalog().setVisible(true);
+                Catalog catalog = new Catalog();
+                catalog.setLocationRelativeTo(null); // Center the frame
+                catalog.setVisible(true);
             }
         });
     }
@@ -414,8 +445,7 @@ public class Catalog extends javax.swing.JFrame {
     private javax.swing.JTextField itemID;
     private javax.swing.JTextField itemName;
     private javax.swing.JTextField itemPrice;
-    private javax.swing.JTextField itemid;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField itemidfield;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -430,8 +460,9 @@ public class Catalog extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField quantity;
+    private javax.swing.JTextField quantityfield;
+    private javax.swing.JButton updateItem;
     // End of variables declaration//GEN-END:variables
 
     private void If(boolean equalsIgnoreCase) {

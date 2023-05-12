@@ -516,6 +516,7 @@ public class Pointofsale extends javax.swing.JFrame {
     private void gotoCatalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoCatalogActionPerformed
         this.dispose();
         Catalog catalog = new Catalog();
+        catalog.setLocationRelativeTo(null); // Center the frame
         catalog.setVisible(true);
     }//GEN-LAST:event_gotoCatalogActionPerformed
 
@@ -591,17 +592,20 @@ public class Pointofsale extends javax.swing.JFrame {
     private void generateReceipt(){
         // Get the data from the cart table
         StringBuilder receipt = new StringBuilder();
-        receipt.append("Receipt\n\n");
+        receipt.append("\tBenjis supermarket\n");
+        receipt.append("Receipt\n");
+        receipt.append("-----------------------------------------------------\n");
+        receipt.append("Item\t").append("Quantity\t").append("Price\n");
+        receipt.append("-----------------------------------------------------\n");
         for (int row = 0; row < cartTable.getRowCount(); row++) {
             String item = cartTable.getValueAt(row, 0).toString();
             String quantity = cartTable.getValueAt(row, 1).toString();
             String price = cartTable.getValueAt(row, 2).toString();
-            receipt.append("Item: ").append(item).append("\n");
-            receipt.append("Quantity: ").append(quantity).append("\n");
-            receipt.append("Price: $").append(price).append("\n\n");
+            receipt.append(item+"\t").append(quantity+"\t").append(price+"\n");
         }
-        receipt.append("5000\n");
-        receipt.append("\nThank you for your purchase!");
+        receipt.append("-----------------------------------------------------\n");
+        receipt.append("Amount paid:"+ calculated_price.getText() +"\n");
+        receipt.append("\nThank you!");
         new ReceiptPrinter(receipt.toString());
     }
     
@@ -681,6 +685,7 @@ public class Pointofsale extends javax.swing.JFrame {
                     System.out.println("Driver not found.");  
                 }
                 JOptionPane.showMessageDialog(this, "Paid");
+                updateCatalog();
                 generateReceipt();
                 clearCart();
             }
@@ -727,7 +732,9 @@ public class Pointofsale extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Pointofsale().setVisible(true);
+                Pointofsale pointofsale = new Pointofsale();
+                pointofsale.setLocationRelativeTo(null); // Center the frame
+                pointofsale.setVisible(true);
             }
         });
     }

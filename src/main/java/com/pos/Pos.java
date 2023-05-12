@@ -4,7 +4,8 @@ import javax.swing.JFrame;
 public class Pos extends JFrame{
 
     public static void main(String[] args) {
-        Catalog catalog = new Catalog();
-        catalog.setVisible(true);
+        LoginForm loginForm = new LoginForm();
+        loginForm.setLocationRelativeTo(null); // Center the frame
+        loginForm.setVisible(true);
     }
 }

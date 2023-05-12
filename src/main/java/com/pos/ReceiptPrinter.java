@@ -8,7 +8,7 @@ public class ReceiptPrinter extends JFrame {
 
     public ReceiptPrinter(String receiptData) {
         setTitle("Receipt Printer");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(400, 300));
 
         textArea = new JTextArea();
